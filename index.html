@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<title></title>
+
+<script src="index_files/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="index_files/jquery-1.11.1/jquery.min.js"></script>
+<script src="index_files/proj4js-2.3.15/proj4.js"></script>
+<link href="index_files/highcharts-5.0.6/css/motion.css" rel="stylesheet" />
+<script src="index_files/highcharts-5.0.6/highstock.js"></script>
+<script src="index_files/highcharts-5.0.6/highcharts-3d.js"></script>
+<script src="index_files/highcharts-5.0.6/highcharts-more.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/annotations.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/broken-axis.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/data.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/drilldown.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/exporting.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/funnel.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/heatmap.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/map.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/no-data-to-display.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/offline-exporting.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/solid-gauge.js"></script>
+<script src="index_files/highcharts-5.0.6/modules/treemap.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/annotations.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/draggable-legend.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/draggable-points.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/export-csv.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/grouped-categories.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/motion.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/pattern-fill-v2.js"></script>
+<script src="index_files/highcharts-5.0.6/plugins/tooltip-delay.js"></script>
+<script src="index_files/highcharts-5.0.6/custom/reset.js"></script>
+<script src="index_files/highcharts-5.0.6/custom/symbols-extra.js"></script>
+<script src="index_files/highcharts-5.0.6/custom/text-symbols.js"></script>
+<link href="index_files/fontawesome-4.5.0/font-awesome.min.css" rel="stylesheet" />
+<link href="index_files/htmlwdgtgrid-1/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="index_files/highchart-binding-0.5.0/highchart.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"></script>
+
+<!-- better use rmarkdown internal syntax highlighting -->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/r.min.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>--->
+<!-- down before body tag -->
+<!--<script>hljs.initHighlightingOnLoad();</script>-->
+
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<!-- https://yihui.name/en/2018/07/latex-math-markdown/
+<script src="//yihui.name/js/math-code.js"></script>-->
+<!-- Just one possible MathJax CDN below. You may use others. -->
+<!--<script src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>-->
+
+<script type="text/javascript"src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style type="text/css">
+pre, code {
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  color: #333;
+  white-space: pre-wrap;    
+}
+pre {
+  border-radius: 3px;
+  margin: 5px 0px 10px 0px;
+  padding: 10px;
+}
+pre:not([class]) {
+  background-color: white;
+}
+code:not([class]) {
+  background-color: white;
+}
+code {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 85%;
+}
+p > code, li > code {
+  padding: 2px 0px;
+}
+</style>
+
+</head>
+<body>
+<div class="ui top attached inverted   menu">
+<a id="toggle_menu" class="item">
+<i class="sidebar icon"></i>
+Menu
+</a>
+<div class="right icon menu">
+<div class="item">CSS</div>
+</div>
+</div>
+<div id="uisidebar" style="min-height: 100vh" class="ui thin left blue vertical  visible inverted menu overlay sidebar">
+<a class="item" href="#shiny-tab-info" data-tab="shiny-tab-info" data-toggle="tab" data-value="info">
+<i class="info circle icon"></i>
+Info
+</a>
+<a class="item" href="#shiny-tab-data" data-tab="shiny-tab-data" data-toggle="tab" data-value="data">
+<i class="server icon"></i>
+Data
+</a>
+<a class="item" href="#shiny-tab-basics" data-tab="shiny-tab-basics" data-toggle="tab" data-value="basics">
+<i class="registered icon"></i>
+Basics
+</a>
+<a class="item" href="#shiny-tab-analysis" data-tab="shiny-tab-analysis" data-toggle="tab" data-value="analysis">
+<i class="line chart icon"></i>
+Models
+</a>
+</div>
+<div class="pusher container" style="min-height: 800vh;">
+<div class="ui segment" style="min-height: 800vh;">
+<div class="ui stackable container grid">
+<div id="shiny-tab-info" class="ui active tab tab-pane container" role="tabpanel" style="height: 100%;" data-tab="shiny-tab-info">
+<div class="ui padded grid">
+<div class="sixteen wide column">
+<!-- TAB 1 -->
+<div class="row">
+<h1>
+Einführung in Computational Social Science mit R
+</h1>
+</div>
+<p><br></p>
+<div class="row">
+<p>Liebe Studierende,</p>
+<p>die R User Group Stuttgart bietet einen kostenlosen Einführungsworkshop in Computational Social Science mit der Statistik-Software R an. Der Workshop eignet sich sowohl für Beginner als auch Leute die bereits Erfahrung mit R gemacht haben. Gemeinsam bearbeiten wir den PIRUS Datensatz, welcher Informationen auf individueller Ebene zu Hintergründen, Attributen und Radikalisierungsprozessen von über 1.800 politischen Extremisten in den USA beinhaltet. Ziel des Workshop ist, dass die Studierenden selbst eine Analyse in R durchgeführt haben um danach eigene Fragestellungen untersuchen zu können. Dazu werden wir sowohl moderne Tools zur Datenverarbeitung und Visualisierung benutzen, als auch erste statistische Modelle implementieren. Statistische Vorkenntnisse sind zwar von Vorteil, müssen aber nicht vorhanden sein. Der Workshop findet am 09.11.2018 von 9-16 Uhr im CIP Pool der Seidenstraße (M36.2) statt.</p>
+<p><span class="math display">\[x^2 = 1 + 1\]</span></p>
+<p>Wenn euer Interesse geweckt ist, meldet euch bitte unter folgendem Link an damit wir mit euch planen können:</p>
+</div>
+<!-- Next Row -->
+<div class="row">
+<div class="sixteen wide column">
+<center>
+<a href = "https://goo.gl/forms/72Zny402mPqW5na72", target = "_blank">
+<button class="ui center aligned button">
+Sign up
+</button>
+</a>
+</center>
+</div>
+</div>
+<p><br> <br></p>
+<!-- Next Row -->
+<div class="row">
+<div class="sixteen wide column">
+<p>Alle weiteren Informationen findet ihr in unserer Facebook-Gruppe: <a href="https://www.facebook.com/groups/rstuttgart/" class="uri">https://www.facebook.com/groups/rstuttgart/</a></p>
+<p>Wir freuen uns auf euer Erscheinen,</p>
+<p>die R User Group Stuttgart</p>
+<!-- Next Row -->
+<h2>
+Tools
+</h2>
+<p><img class="ui small image" src="images/rstudio.png"></p>
+<!-- Next Row -->
+<h2>
+Packages
+</h2>
+<div class="ui tiny images">
+<p><img src="images/tidyverse.png"> <img src="images/dplyr.png"> <img src="images/ggplot2.png"></p>
+</div>
+<!-- Next Row -->
+<h2 class="ui disabled header">
+Not discussed in this Workshop
+</h2>
+<div class="ui tiny images">
+<p><img src="images/purrr.png"> <img src="images/forcats.png"> <img src="images/stringr.png"></p>
+</div>
+<!-- Next Row -->
+<h2>
+Workflow
+</h2>
+<p><img class="ui large image" src="images/workflow.png"></p>
+<ol style="list-style-type: decimal">
+<li>Import data into R: read_csv(), readLines(), read_delim()</li>
+<li>Tidy data - variables per column, observation by row</li>
+<li>Tranform with dplyr</li>
+<li>Visualize with ggplot2</li>
+</ol>
+<p>(Wickham and Grolemund, 2017)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="shiny-tab-data" class="ui tab tab-pane container" role="tabpanel" style="height: 100%;" data-tab="shiny-tab-data">
+<div class="ui padded grid">
+<div class="sixteen wide column">
+<!-- TAB 1 -->
+<div class="row">
+<h1>
+Data
+</h1>
+</div>
+<div class="row">
+<div class="ui secondary menu">
+<div class="active item" data-tab="tabname">
+Tables
+</div>
+<div class="item" data-tab="tabname2">
+Data
+</div>
+</div>
+</div>
+<div class="row">
+<div class="ui active tab" data-tab="tabname">
+<table style="border-collapse:collapse; border:none;"><tr>
+<th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">ID</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Name</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Type</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Label</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">missings</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Values</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Value Labels</th>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">1</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">subject_id</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">0 (0.00%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;" colspan="2"><em>range: 1000-9411</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">2</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">age</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">83 (4.45%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee" colspan="2"><em>range: 15-88</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">3</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">gender</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">0 (0.00%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;" colspan="2"><em>range: 1-2</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">4</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">student</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">805 (43.16%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee" colspan="2"><em>range: 0-1</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">5</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">abuse_child</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">0 (0.00%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;" colspan="2"><em>range: 0-3</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">6</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">crime_history</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">854 (45.79%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee" colspan="2"><em>range: 0-3</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">7</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">extent</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">27 (1.45%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;" colspan="2"><em>range: 0-5</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">8</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">terror_group</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">character</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">730 (39.14%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Abu Nidal Organization (Fatah al-Qiyadah al-Thawriyyah)<br>Al Qaeda<br>al-Itihaad al-Islamiya<br>al-Qaeda (unspecified)<br>al-Qaeda core<br></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">9</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">radicalization</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">numeric</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">193 (10.35%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;" colspan="2"><em>range: 0-5</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">10</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">type</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">character</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">0 (0.00%)</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Far Left<br>Far Right<br>Islamism<br>Single Issue</td>
+</tr>
+
+</table>
+</div>
+<div class="ui tab" data-tab="tabname2">
+<pre><code>## Observations: 1,865
+## Variables: 10
+## $ subject_id     &lt;dbl&gt; 1000, 1001, 1002, 1005, 1006, 1010, 1013, 1014,...
+## $ age            &lt;dbl&gt; 32, 20, 28, 25, 25, 27, 23, 28, 26, 25, 25, 24,...
+## $ gender         &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,...
+## $ student        &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NA, 1, 0, 0...
+## $ abuse_child    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+## $ crime_history  &lt;dbl&gt; 3, 0, 3, 0, NA, NA, 1, 1, 1, NA, NA, 0, NA, 0, ...
+## $ extent         &lt;dbl&gt; 2, 0, NA, 5, 5, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0...
+## $ terror_group   &lt;chr&gt; &quot;al-Qaeda core&quot;, &quot;Taliban&quot;, &quot;al-Qaeda core&quot;, NA...
+## $ radicalization &lt;dbl&gt; 4, 5, 5, 5, 5, 5, 2, 2, NA, 2, 5, 3, 2, 5, 5, 5...
+## $ type           &lt;chr&gt; &quot;Islamism&quot;, &quot;Islamism&quot;, &quot;Islamism&quot;, &quot;Islamism&quot;,...</code></pre>
+</div>
+</div>
+<!-- JAVASCRIPT TRIGGER -->
+<script>
+$('.secondary.menu .item').tab();
+</script>
+<p><br> <br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(highcharter)
+<span class="kw">data</span>(diamonds, economics_long, mpg, <span class="dt">package =</span> <span class="st">&quot;ggplot2&quot;</span>)
+<span class="kw">library</span>(dplyr)
+
+<span class="kw">hchart</span>(diamonds<span class="op">$</span>price) </code></pre></div>
+<div id="htmlwidget-988a98bdaf8900606d16" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-988a98bdaf8900606d16">{"x":{"hc_opts":{"title":{"text":null},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"bubble":{"minSize":5,"maxSize":25}},"annotationsOptions":{"enabledButtons":false},"tooltip":{"delayForDisplay":10,"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"chart":{"zoomType":"x"},"series":[{"data":[{"x":300,"y":251,"name":"(200, 400]"},{"x":500,"y":3885,"name":"(400, 600]"},{"x":700,"y":5668,"name":"(600, 800]"},{"x":900,"y":4720,"name":"(800, 1000]"},{"x":1100,"y":3051,"name":"(1000, 1200]"},{"x":1300,"y":1866,"name":"(1200, 1400]"},{"x":1500,"y":1049,"name":"(1400, 1600]"},{"x":1700,"y":2029,"name":"(1600, 1800]"},{"x":1900,"y":1688,"name":"(1800, 2000]"},{"x":2100,"y":1274,"name":"(2000, 2200]"},{"x":2300,"y":1478,"name":"(2200, 2400]"},{"x":2500,"y":1196,"name":"(2400, 2600]"},{"x":2700,"y":1080,"name":"(2600, 2800]"},{"x":2900,"y":1101,"name":"(2800, 3000]"},{"x":3100,"y":888,"name":"(3000, 3200]"},{"x":3300,"y":867,"name":"(3200, 3400]"},{"x":3500,"y":778,"name":"(3400, 3600]"},{"x":3700,"y":865,"name":"(3600, 3800]"},{"x":3900,"y":827,"name":"(3800, 4000]"},{"x":4100,"y":954,"name":"(4000, 4200]"},{"x":4300,"y":995,"name":"(4200, 4400]"},{"x":4500,"y":975,"name":"(4400, 4600]"},{"x":4700,"y":928,"name":"(4600, 4800]"},{"x":4900,"y":813,"name":"(4800, 5000]"},{"x":5100,"y":766,"name":"(5000, 5200]"},{"x":5300,"y":696,"name":"(5200, 5400]"},{"x":5500,"y":614,"name":"(5400, 5600]"},{"x":5700,"y":558,"name":"(5600, 5800]"},{"x":5900,"y":529,"name":"(5800, 6000]"},{"x":6100,"y":513,"name":"(6000, 6200]"},{"x":6300,"y":486,"name":"(6200, 6400]"},{"x":6500,"y":463,"name":"(6400, 6600]"},{"x":6700,"y":449,"name":"(6600, 6800]"},{"x":6900,"y":367,"name":"(6800, 7000]"},{"x":7100,"y":363,"name":"(7000, 7200]"},{"x":7300,"y":349,"name":"(7200, 7400]"},{"x":7500,"y":367,"name":"(7400, 7600]"},{"x":7700,"y":307,"name":"(7600, 7800]"},{"x":7900,"y":282,"name":"(7800, 8000]"},{"x":8100,"y":264,"name":"(8000, 8200]"},{"x":8300,"y":237,"name":"(8200, 8400]"},{"x":8500,"y":248,"name":"(8400, 8600]"},{"x":8700,"y":286,"name":"(8600, 8800]"},{"x":8900,"y":272,"name":"(8800, 9000]"},{"x":9100,"y":223,"name":"(9000, 9200]"},{"x":9300,"y":234,"name":"(9200, 9400]"},{"x":9500,"y":229,"name":"(9400, 9600]"},{"x":9700,"y":195,"name":"(9600, 9800]"},{"x":9900,"y":195,"name":"(9800, 10000]"},{"x":10100,"y":201,"name":"(10000, 10200]"},{"x":10300,"y":190,"name":"(10200, 10400]"},{"x":10500,"y":175,"name":"(10400, 10600]"},{"x":10700,"y":197,"name":"(10600, 10800]"},{"x":10900,"y":171,"name":"(10800, 11000]"},{"x":11100,"y":212,"name":"(11000, 11200]"},{"x":11300,"y":157,"name":"(11200, 11400]"},{"x":11500,"y":173,"name":"(11400, 11600]"},{"x":11700,"y":141,"name":"(11600, 11800]"},{"x":11900,"y":142,"name":"(11800, 12000]"},{"x":12100,"y":132,"name":"(12000, 12200]"},{"x":12300,"y":152,"name":"(12200, 12400]"},{"x":12500,"y":124,"name":"(12400, 12600]"},{"x":12700,"y":156,"name":"(12600, 12800]"},{"x":12900,"y":137,"name":"(12800, 13000]"},{"x":13100,"y":126,"name":"(13000, 13200]"},{"x":13300,"y":131,"name":"(13200, 13400]"},{"x":13500,"y":106,"name":"(13400, 13600]"},{"x":13700,"y":124,"name":"(13600, 13800]"},{"x":13900,"y":116,"name":"(13800, 14000]"},{"x":14100,"y":98,"name":"(14000, 14200]"},{"x":14300,"y":116,"name":"(14200, 14400]"},{"x":14500,"y":110,"name":"(14400, 14600]"},{"x":14700,"y":98,"name":"(14600, 14800]"},{"x":14900,"y":82,"name":"(14800, 15000]"},{"x":15100,"y":105,"name":"(15000, 15200]"},{"x":15300,"y":105,"name":"(15200, 15400]"},{"x":15500,"y":85,"name":"(15400, 15600]"},{"x":15700,"y":89,"name":"(15600, 15800]"},{"x":15900,"y":129,"name":"(15800, 16000]"},{"x":16100,"y":81,"name":"(16000, 16200]"},{"x":16300,"y":93,"name":"(16200, 16400]"},{"x":16500,"y":78,"name":"(16400, 16600]"},{"x":16700,"y":102,"name":"(16600, 16800]"},{"x":16900,"y":71,"name":"(16800, 17000]"},{"x":17100,"y":102,"name":"(17000, 17200]"},{"x":17300,"y":82,"name":"(17200, 17400]"},{"x":17500,"y":77,"name":"(17400, 17600]"},{"x":17700,"y":68,"name":"(17600, 17800]"},{"x":17900,"y":76,"name":"(17800, 18000]"},{"x":18100,"y":93,"name":"(18000, 18200]"},{"x":18300,"y":75,"name":"(18200, 18400]"},{"x":18500,"y":77,"name":"(18400, 18600]"},{"x":18700,"y":62,"name":"(18600, 18800]"},{"x":18900,"y":5,"name":"(18800, 19000]"}],"type":"column","pointRange":200,"groupPadding":0,"pointPadding":0,"borderWidth":0}]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="shiny-tab-basics" class="ui tab tab-pane container" role="tabpanel" style="height: 100%;" data-tab="shiny-tab-basics">
+<div class="ui padded grid">
+<div class="sixteen wide column">
+<div class="sixteen wide column">
+<h2 id="grundlagen">Grundlagen</h2>
+<p>Zunächst einmal die Basics zu Rmarkdown.</p>
+<p>Das ist ein Chunk:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello World!&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Hello World!&quot;</code></pre>
+<p><br></p>
+<p>Klick doch einfach mal auf den grünen “Play” Button.</p>
+<p><br></p>
+<h3 id="r-als-taschenrechner">R als Taschenrechner</h3>
+<ul>
+<li><code>+</code> addieren</li>
+<li><code>-</code> subtrahieren</li>
+<li><code>*</code> multiplizieren</li>
+<li><code>/</code> dividieren</li>
+<li><code>^</code> exponieren</li>
+</ul>
+<p><strong>Aufgaben:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>34+77</p></li>
+<li><p>(500 geteilt durch 125) plus 3 mal 6 hoch 2</p></li>
+<li><p>Berechne die Differenz zwischen 2018 und dem Jahr, an dem du begonnen hast zu studieren und dividiere das durch die Differenz zwischen 2018 und dem Jahr, in dem du geboren wurdest. Multipliziere dies mit 100, um den Prozentsatz deines Lebens zu erhalten, den du an die Uni verbracht hast.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">34</span>  <span class="op">+</span><span class="st"> </span><span class="dv">77</span> </code></pre></div>
+<pre><code>## [1] 111</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">500</span> <span class="op">/</span><span class="st"> </span><span class="dv">125</span>) <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">6</span><span class="op">^</span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 112</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">2018</span> <span class="op">-</span><span class="st"> </span><span class="dv">2013</span>)<span class="op">/</span>(<span class="dv">2018</span> <span class="op">-</span><span class="st"> </span><span class="dv">1991</span>)</code></pre></div>
+<pre><code>## [1] 0.1851852</code></pre>
+<h3 id="objekte-und-zuweisung">Objekte und Zuweisung</h3>
+<p>In R kann man je nach Rechenleistung zehntausende Datensätze auf einmal laden und verarbeiten. Das wird möglich da jeder Datensatz seinen eigenen Namen besitzt. Dieser muss mit einem Buchstaben beginnen, kann aber durchaus auch . oder _ oder Zahlen enthalten. Um einem Objekt einen Namen zuzuweisen wird das Zeichen &lt;- (Zuweisungspfeil) eingesetzt. Objekte können einzelne Zahlen, Variablen oder auch Datensätze sein. Mit den Objektennamen können Daten jeglicher Art abgespeichert und abgerufen werden.</p>
+<p><strong>Führe einfach mal den folgenden Chunk aus!</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">2</span>   <span class="co">#definiere x als 1</span>
+x</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p><strong>Aufgaben:</strong></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Erstelle ein neues Objekt y mit deiner Lieblingszahl. Adddiere x und y und speichere das Ergebnis in z. Gebe z aus!</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="dv">21</span>
+z &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y
+z</code></pre></div>
+<pre><code>## [1] 23</code></pre>
+<h3 id="wichtige-operatoren">Wichtige Operatoren</h3>
+<p><strong>Boolean</strong></p>
+<ul>
+<li><code>&amp;</code> (logisch) und</li>
+<li><code>|</code> (logisch) oder</li>
+<li><code>!</code> (logisch) nicht</li>
+</ul>
+<p><strong>Weitere Operatoren</strong></p>
+<ul>
+<li><code>==</code> (logisch) ist gleich</li>
+<li><code>!=</code> (logisch) ist ungleich</li>
+<li><code>%in%</code> (string) ist gleich</li>
+<li><code>&gt;</code> größer als</li>
+<li><code>&lt;</code> kleiner als</li>
+<li><code>&gt;=</code> größer gleich</li>
+<li><code>&lt;=</code> kleiner gleich</li>
+<li><code>is.na()</code> ist gleich NA (fehlender Wert)</li>
+<li><code>!is.na()</code> ist ungleich NA</li>
+</ul>
+<p><strong>Beispiele</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">3</span>    <span class="co">#ist 3 gleich 3?</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>     <span class="co">#ist 4 größer als 5?</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;albert&quot;</span> <span class="op">==</span><span class="st"> &quot;albert&quot;</span>   <span class="co">#ist albert gleich albert vor?</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>R gibt hier entweder <code>TRUE</code> oder <code>FALSE</code> aus, abhängig davon ob der benutzte logische Operator zutrifft oder nicht.</p>
+<h3 id="vektoren-i">Vektoren I</h3>
+<p>Vektoren in R sind einfach mehrere Werte die aneinander gebunden werden. Diese können Zahlen aber auch strings (Buchstabenfolgen) sein. Hiflreich dabei ist die <code>c()</code> Funktion (c steht für <em>concatenate</em> = verketten auf Deutsch).</p>
+<p><strong>Beispiele:</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>)</code></pre></div>
+<pre><code>## [1] 4 1 3 4 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>) <span class="co">#definiere Vektor mit den Werten 4, 1, 3, 4 und 8</span>
+vektor</code></pre></div>
+<pre><code>## [1] 4 1 3 4 8</code></pre>
+<p>Operatoren können auch ganz einfach mit Vektoren angewandt werden.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor <span class="op">*</span><span class="st"> </span>vektor     <span class="co">#vektor mit sich selbst mal nehmen</span></code></pre></div>
+<pre><code>## [1] 16  1  9 16 64</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor <span class="op">==</span><span class="st"> </span>vektor    <span class="co">#sind alle Werte von vektor gleich alle Werte von vektor?</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<p><strong>Aufgabe</strong></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Bilde einen Vektor mit dem Namen <code>cm</code> und den folgenden Größen in Zentimeter:</li>
+</ol>
+<ul>
+<li><code>190</code></li>
+<li><code>152</code></li>
+<li><code>174</code></li>
+</ul>
+<p>Teile dann <code>cm</code> durch Hundert um die Größen in Meter zu erhalten!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cm &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">190</span>, <span class="dv">152</span>, <span class="dv">174</span>)
+cm <span class="op">/</span><span class="st"> </span><span class="dv">100</span></code></pre></div>
+<pre><code>## [1] 1.90 1.52 1.74</code></pre>
+<p>Wollen wir auf einen bestimmten Wert in unserem Vektor zugreifen, dann benutzen wir <strong>eckige Klammern</strong> <code>[...]</code> auf die folgende Art und Weise:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor     </code></pre></div>
+<pre><code>## [1] 4 1 3 4 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor[<span class="dv">3</span>]  <span class="co">#gibt uns das dritte Element von vektor aus</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor[<span class="dv">5</span>]  <span class="co">#gibt uns das fünfte Element von vektor aus</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor[<span class="dv">1</span>] <span class="op">/</span><span class="st"> </span>vektor[<span class="dv">4</span>] <span class="co">#teile die erste Stelle von vektor durch die fünfte Stelle von vektor</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<h3 id="funktionen">Funktionen</h3>
+<p>Das Ziel einer Funktion ist es Daten zu verarbeiten. Dazu gibt es einen <em>input</em> und einen <em>output</em>.</p>
+<p>Definieren wir doch mal eine Funktion, welche Werte die man als <em>input</em> eingibt wieder quadriert als <em>output</em> gibt. Dazu benutzen wir <code>function()</code> und bestimmen dabei die Argumente welche wir jeweils eintippen wollen. Die Funktion selber wird in geschweiften Klammern <code>{}</code> codiert.</p>
+<p><strong>Beispiele:</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quadrieren &lt;-<span class="st"> </span><span class="cf">function</span>(input) { 
+  output &lt;-<span class="st"> </span>input<span class="op">^</span><span class="dv">2</span>        <span class="co">#nehme den input hoch 2 und speichere ihn in output</span>
+  <span class="kw">return</span>(output)                   <span class="co">#gebe output aus</span>
+}
+<span class="co">#Funktion ausprobieren!</span>
+<span class="kw">quadrieren</span>(<span class="dv">9</span>)   </code></pre></div>
+<pre><code>## [1] 81</code></pre>
+<p>Wir können auch zwei oder mehrere Argumente zu einer Funktion hinzufügen. Probieren wir das gleiche doch mal mit einer Funktion die jeder aus dem Physik - Unterricht kennen sollte:</p>
+<p><strong>Distanz = Geschwindigkeit * Zeit</strong></p>
+<p><span class="math display">\[Distanz = Geschwindigkeit \times Zeit\]</span></p>
+<p>bzw.</p>
+<p><span class="math display">\[s  = v * t\]</span></p>
+<p><strong>s = v * t</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">distanz &lt;-<span class="st"> </span><span class="cf">function</span>(v, t) {
+ s &lt;-<span class="st"> </span>v <span class="op">*</span><span class="st"> </span>t       <span class="co">#v mal t und definiere deren Ergebnis als s</span>
+ s                <span class="co">#gebe s aus</span>
+}
+<span class="co">#Funktion ausprobieren!</span>
+<span class="kw">distanz</span>(<span class="dt">v =</span> <span class="dv">50</span>, <span class="dt">t =</span> <span class="dv">6</span>)</code></pre></div>
+<pre><code>## [1] 300</code></pre>
+<p>Nun müssen wir allerdings nicht immer selber Funktionen definieren. Im Gegenteil! <code>Base R</code> und die vielen Packages haben unzählige Funktionen, die Datenbearbeitung einfach machen. Beispielsweise gibt <code>mean()</code> den Mittelwert eines Vektors aus und <code>sd()</code> gibt die Standardabweichung.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vektor2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+<span class="kw">mean</span>(vektor2)   <span class="co">#gib den Mittelwert von vektor aus</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(vektor2)     <span class="co">#gib die Standardabweichung von vektor aus</span></code></pre></div>
+<pre><code>## [1] 1.581139</code></pre>
+<h3 id="vektoren-ii">Vektoren II</h3>
+<p>Nun eine kleine Übersicht über die Arten von Vektoren:</p>
+<p><strong>Es gibt drei Haupttypen</strong></p>
+<ul>
+<li><strong>Character:</strong> aka “String” oder ‘String’, ist einfach nur Text.</li>
+<li><strong>Factor:</strong> Factors können eine Reihenfolge haben sogennante <em>Levels</em>.</li>
+<li><strong>Numeric:</strong> Jeglicher Zahleninput mit dem man rechnen kann.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Männlich&quot;</span>, <span class="st">&quot;Weiblich&quot;</span>)
+fac &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;Männlich&quot;</span>, <span class="st">&quot;Weiblich&quot;</span>))
+num &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+
+<span class="kw">class</span>(char)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(fac)</code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(num)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p><strong>Tranformation zwischen den Datentypen</strong></p>
+<ul>
+<li><code>as.character()</code></li>
+<li><code>as.factor()</code></li>
+<li><code>as.numeric()</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(num)</code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.factor</span>(char)</code></pre></div>
+<pre><code>## [1] Männlich Weiblich
+## Levels: Männlich Weiblich</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(fac)</code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="shiny-tab-analysis" class="ui tab tab-pane container" role="tabpanel" style="height: 100%;" data-tab="shiny-tab-analysis">
+<div class="ui padded grid">
+<div class="sixteen wide column">
+<h1>
+Data
+</h1>
+<h2 id="packages-and-folders">Packages and Folders</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pacman<span class="op">::</span><span class="kw">p_load</span>(tidyverse, janitor, EnvStats, ggthemes, texreg, openxlsx, data.table)
+
+recode_missings &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">ifelse</span>(x <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">88</span>, <span class="op">-</span><span class="dv">99</span>), <span class="ot">NA</span>, x)
+}</code></pre></div>
+<h2 id="data">Data</h2>
+<div class="row">
+<div class="ui tabular menu">
+<div class="active item" data-tab="tabname3">
+Glimpse
+</div>
+<div class="item" data-tab="tabname4">
+Code
+</div>
+</div>
+</div>
+<div class="row">
+<div class="ui active tab" data-tab="tabname3">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>glimpse</code></pre></div>
+<pre><code>## Observations: 1,865
+## Variables: 10
+## $ subject_id     &lt;dbl&gt; 1000, 1001, 1002, 1005, 1006, 1010, 1013, 1014,...
+## $ age            &lt;dbl&gt; 32, 20, 28, 25, 25, 27, 23, 28, 26, 25, 25, 24,...
+## $ gender         &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,...
+## $ student        &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, NA, 1, 0, 0...
+## $ abuse_child    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+## $ crime_history  &lt;dbl&gt; 3, 0, 3, 0, NA, NA, 1, 1, 1, NA, NA, 0, NA, 0, ...
+## $ extent         &lt;dbl&gt; 2, 0, NA, 5, 5, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0...
+## $ terror_group   &lt;chr&gt; &quot;al-Qaeda core&quot;, &quot;Taliban&quot;, &quot;al-Qaeda core&quot;, NA...
+## $ radicalization &lt;dbl&gt; 4, 5, 5, 5, 5, 5, 2, 2, NA, 2, 5, 3, 2, 5, 5, 5...
+## $ type           &lt;chr&gt; &quot;Islamism&quot;, &quot;Islamism&quot;, &quot;Islamism&quot;, &quot;Islamism&quot;,...</code></pre>
+</div>
+<div class="ui tab" data-tab="tabname4">
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_pirus &lt;-<span class="st"> </span>openxlsx<span class="op">::</span><span class="kw">read.xlsx</span>(<span class="st">&quot;start_pirus_2018.xlsx&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>janitor<span class="op">::</span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_all</span>(recode_missings)  <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">type =</span> <span class="kw">case_when</span>(
+      radicalization_islamist <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Islamism&quot;</span>,
+      radicalization_far_right <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Far Right&quot;</span>,
+      radicalization_far_left <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Far Left&quot;</span>,
+      radicalization_single_issue <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Single Issue&quot;</span>
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>forcats<span class="op">::</span><span class="kw">fct_relevel</span>(<span class="st">&quot;Single Issue&quot;</span>)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">unemployed =</span> <span class="kw">ifelse</span>(employment_status <span class="op">%in%</span><span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">married =</span> <span class="kw">ifelse</span>(marital_status <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">male =</span> <span class="kw">ifelse</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mental =</span> <span class="kw">ifelse</span>(psychological <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">crime_history =</span> <span class="kw">case_when</span>(
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">~</span><span class="st"> &quot;None&quot;</span>,
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> &quot;Non-Violent&quot;</span>,
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> &quot;Non-Violent&quot;</span>,
+      previous_criminal_activity <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">~</span><span class="st"> &quot;Violent&quot;</span>
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span>forcats<span class="op">::</span><span class="kw">fct_relevel</span>(<span class="st">&quot;None&quot;</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(
+    subject_id, 
+    age, 
+    male, 
+    married,
+    unemployed,
+    mental,
+    abuse_child, 
+    crime_history, 
+    violent,
+    <span class="dt">extent =</span> extent_plot, 
+    <span class="dt">terror_group =</span> terrorist_group_name1,
+    <span class="dt">radicalization =</span> radical_beliefs,
+    type,
+    clique
+  )</code></pre></div>
+</div>
+</div>
+<!-- JAVASCRIPT TRIGGER -->
+<script>
+$('.tabular.menu .item').tab();
+</script>
+<h2 id="lineare-regression">Lineare Regression</h2>
+<p><span class="math display">\[y_i = \beta_0 + \beta_1x_{1i} + \varepsilon_i\]</span></p>
+<p>Eine lineare Regression wird auf folgende Weise durchgeführt:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(extent <span class="op">~</span><span class="st"> </span>radicalization, <span class="dt">data =</span> start_pirus) </code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = extent ~ radicalization, data = start_pirus)
+## 
+## Coefficients:
+##    (Intercept)  radicalization  
+##         1.6413          0.1233</code></pre>
+<p>Genauso wie alles andere in R können wir auch eine lineare Regression in ein Objekt packen:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st"> </span>radicalization, <span class="dt">data =</span> start_pirus) 
+
+model1</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = extent ~ radicalization, data = start_pirus)
+## 
+## Coefficients:
+##    (Intercept)  radicalization  
+##         1.6413          0.1233</code></pre>
+<p>Die lineare Regression in ein Objekt zu packen hilft uns dabei die Resultate der Regression näher unter die Lupe zu nehmen.</p>
+<p><code>screenreg</code> aus dem <code>texreg</code> package gibt uns eine schöne Regressiontabelle aus:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screenreg</span>(model1)</code></pre></div>
+<pre><code>## 
+## ===========================
+##                 Model 1    
+## ---------------------------
+## (Intercept)        1.64 ***
+##                   (0.15)   
+## radicalization     0.12 ***
+##                   (0.04)   
+## ---------------------------
+## R^2                0.01    
+## Adj. R^2           0.01    
+## Num. obs.       1651       
+## RMSE               2.19    
+## ===========================
+## *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05</code></pre>
+<p><strong>Aufgabe</strong></p>
+<p>Versucht einmal eine Regresion durchzuführen in der ihr <code>extent</code> (AV) mit <code>crime_history</code> (UV) versucht zu erklären.</p>
+<p>Als nächtes wollen wir eine kleine Analyse gemeinsam ausführen. Ziel ist es zu erklären wie sich der Radikalisierungsgrad (<em>radicalization</em>) einer Person auf die Fortgeschrittenheit der Planung einer extremistischen Tat (<em>extent</em>) auswirkt. Dazu nehmen wir auch einig Kontrolle heran:</p>
+<ul>
+<li><code>abuse_child</code></li>
+<li><code>crime_history</code></li>
+<li><code>age</code></li>
+<li><code>male</code></li>
+</ul>
+<p><em>1. Schritt: eigenen Datensatz für die Analyse erstellen und alle NAs (missing values) rauswerfen</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start_lm &lt;-<span class="st"> </span>start_pirus <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(radicalization, age, male, abuse_child, crime_history)</code></pre></div>
+<p><code>drop_na</code> entfernt alle Fälle welche in den obigen Variablen ein NA haben</p>
+<p><em>2. Schritt: Bauen wir ein sequentielles Modell</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st">  </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st"> </span>radicalization, <span class="dt">data =</span> start_lm) 
+
+model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st">  </span>radicalization <span class="op">+</span><span class="st"> </span>abuse_child <span class="op">+</span><span class="st"> </span>crime_history, <span class="dt">data =</span> start_lm) 
+
+model3 &lt;-<span class="st"> </span><span class="kw">lm</span>(extent <span class="op">~</span><span class="st">  </span>radicalization <span class="op">+</span><span class="st"> </span>abuse_child <span class="op">+</span><span class="st"> </span>crime_history <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>male, <span class="dt">data =</span> start_lm) </code></pre></div>
+<p><em>3. Schritt: Resultate darstellen</em></p>
+<p><code>screenreg</code> erlaubt es uns auch mit <code>list</code> mehrere Modelle zu übergeben:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">screenreg</span>(<span class="kw">list</span>(model1, model2, model3))</code></pre></div>
+<pre><code>## 
+## ============================================================
+##                           Model 1     Model 2     Model 3   
+## ------------------------------------------------------------
+## (Intercept)                 1.76 ***    1.59 ***    2.27 ***
+##                            (0.20)      (0.21)      (0.33)   
+## radicalization              0.10 *      0.09        0.11 *  
+##                            (0.05)      (0.05)      (0.05)   
+## abuse_child                             0.41 *      0.36 *  
+##                                        (0.17)      (0.17)   
+## crime_historyNon-Violent                0.02        0.13    
+##                                        (0.18)      (0.19)   
+## crime_historyViolent                    0.84 ***    0.91 ***
+##                                        (0.19)      (0.19)   
+## age                                                -0.02 ***
+##                                                    (0.01)   
+## male                                               -0.09    
+##                                                    (0.24)   
+## ------------------------------------------------------------
+## R^2                         0.00        0.03        0.05    
+## Adj. R^2                    0.00        0.03        0.04    
+## Num. obs.                 913         913         913       
+## RMSE                        2.18        2.15        2.14    
+## ============================================================
+## *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model3 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>sjPlot<span class="op">::</span><span class="kw">plot_model</span>(<span class="dt">show.p =</span> T, <span class="dt">show.values =</span> T, <span class="dt">sort.est =</span> T)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<h2 id="logistische-regression">Logistische Regression</h2>
+<p><span class="math display">\[\hat z_i = \beta_0 + \beta_1x_{1i}\]</span></p>
+<p><span class="math display">\[p_i = \frac{1}{1 + e^{- \hat z}} \]</span></p>
+<p>Auch logistische Regression können einfach geschätzt werden. Hier ein weiteres Modell, bei dem wir versuchen werden zu erklären wann ein Extremist Gewalt anwendet (<em>violent</em>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm1 &lt;-<span class="st"> </span><span class="kw">glm</span>(violent <span class="op">~</span><span class="st"> </span>unemployed <span class="op">+</span><span class="st"> </span>married <span class="op">+</span><span class="st"> </span>
+<span class="st">              </span>age <span class="op">+</span><span class="st"> </span>male <span class="op">+</span><span class="st"> </span>mental <span class="op">+</span><span class="st"> </span>
+<span class="st">              </span>crime_history <span class="op">+</span><span class="st"> </span>clique, 
+            <span class="dt">data =</span> start_lm, 
+            <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+
+glm1</code></pre></div>
+<pre><code>## 
+## Call:  glm(formula = violent ~ unemployed + married + age + male + mental + 
+##     crime_history + clique, family = &quot;binomial&quot;, data = start_lm)
+## 
+## Coefficients:
+##              (Intercept)                unemployed  
+##                   0.5115                    0.3419  
+##                  married                       age  
+##                  -0.6841                   -0.0253  
+##                     male                    mental  
+##                   0.8101                    0.5963  
+## crime_historyNon-Violent      crime_historyViolent  
+##                   0.4621                    0.8736  
+##                   clique  
+##                   0.4974  
+## 
+## Degrees of Freedom: 540 Total (i.e. Null);  532 Residual
+##   (379 observations deleted due to missingness)
+## Null Deviance:       679.6 
+## Residual Deviance: 614.5     AIC: 632.5</code></pre>
+<p>Mit der <code>plot_model</code> Funktion aus dem <code>sjPlot</code> pckage können wir uns auch sogenannte <em>coefficient plots</em> ausgeben lassen</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">glm1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>sjPlot<span class="op">::</span><span class="kw">plot_model</span>(<span class="dt">show.p =</span> T, <span class="dt">show.values =</span> T, <span class="dt">sort.est =</span> T)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<script>  
+    var set_pusher_size = function(on_click) {
+      var sidebar = $('#uisidebar');
+      var window_width = $(window).width();
+      var pusher = $('.container > .pusher');
+      var is_sidebar_visible_after_transition = sidebar.hasClass('visible')
+      if (on_click) {
+        is_sidebar_visible_after_transition = !is_sidebar_visible_after_transition
+      };
+      if (is_sidebar_visible_after_transition) {sidebar_width = sidebar.width()} else {sidebar_width = 0};
+      if (sidebar.hasClass('left')) {margin_left = sidebar_width} else {margin_left = 0};
+      if (sidebar.hasClass('right')) {margin_right = sidebar_width} else {margin_right = 0};
+      pusher.width(window_width - sidebar_width);
+      pusher.css({'margin-left' : margin_left, 'margin-right' : margin_right});
+    };
+    $('#toggle_menu').click(function() {set_pusher_size(true)});
+    $(document).ready(function() {set_pusher_size(false)});
+    $(window).resize(function() {set_pusher_size(false)});
+</script>
+<script>
+  /* Code below is needed to trigger visibility on reactive Shiny outputs. */
+  /* Thanks to that users do not have to set suspendWhenHidden to FALSE.   */
+  var previous_tab;
+  $('#uisidebar .item').tab({
+    onVisible: function(target) {
+      if (previous_tab) {
+        $(this).trigger('hidden');
+      }
+      $(window).resize();
+      $(this).trigger('shown');
+      previous_tab = this;
+    }
+  });
+
+  $('#uisidebar')
+    .sidebar({
+      context: $('.pusher'),
+      transition: 'push',
+      dimPage: false,
+      closable: false
+    })
+    .sidebar('attach events', '#toggle_menu');
+</script>
+<!--<script>
+  $("pre code").each(function(){
+      var html = $(this).html();
+      var pattern = html.match(/\s*\n[\t\s]*/);
+      $(this).html(html.replace(new RegExp(pattern, "g"),'\n'));
+  });
+</script>-->
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
